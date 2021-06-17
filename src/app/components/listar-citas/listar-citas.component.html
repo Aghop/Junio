@@ -1,0 +1,7 @@
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action"
+        *ngFor="let cita of citas"
+    >
+    {{cita.idPaciente}} {{cita.idEstado | estado | titlecase }} {{ medico | medico: cita.idMedico }} {{cita.fechaHora | date: 'short'}} {{cita.descripcion}}
+</a>
+</div>
