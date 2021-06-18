@@ -2,8 +2,7 @@ import pacienteRepository from "./paciente.repository";
 import { Paciente } from "../../models/paciente.model";
 
 function getPacientes() {
-    let pacientes= pacienteRepository.getPacientes();
-    return pacientes;
+    return pacienteRepository.getPacientes();
 };
 
 function getPacienteById(id: String) {
@@ -17,6 +16,5 @@ function getPacienteById(id: String) {
 function addPaciente(paciente: Paciente){
     return pacienteRepository.addPaciente(paciente);
 }
-
 
 export default { getPacientes, getPacienteById, addPaciente }

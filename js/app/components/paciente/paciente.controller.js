@@ -5,8 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var paciente_repository_1 = __importDefault(require("./paciente.repository"));
 function getPacientes() {
-    var pacientes = paciente_repository_1.default.getPacientes();
-    return pacientes;
+    return paciente_repository_1.default.getPacientes();
 }
 ;
 function getPacienteById(id) {
