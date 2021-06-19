@@ -22,6 +22,8 @@ export class ListarCitasComponent implements OnInit {
   public medico$: Observable<Medico[]>;
   public especialidad$: Observable<Especialidad[]>;
   public radioSelected:string;
+  public displayedColumns1: string[] = ['Fecha', 'Medico', 'Especialidad','Reprogramar','Cancelar'];
+  public displayedColumns2: string[] = ['Fecha', 'Medico', 'Especialidad','Estado'];
   constructor(public servicioCitas:ServicioCitasService, public servicioMedicos: ServicioMedicoService, public servicioExtra: ServicioExtrasService,public form: FormBuilder, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.citas$ = new Observable();
     this.medico$ = new Observable();

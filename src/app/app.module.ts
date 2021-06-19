@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavVarComponent } from './components/nav-var/nav-var.component';
@@ -14,6 +14,7 @@ import { MedicoPipe } from './pipes/medicos/medico.pipe';
 import { EspecialidadIdPipe } from './pipes/especialidad/especialidad-id.pipe';
 import { IdToNamePipe } from './pipes/especialidad/id-to-name.pipe';
 import { CountCitaPipe } from './pipes/cita/count-cita.pipe';
+import { FiltroEstadoPipe } from './pipes/estados/filtro-estado.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CountCitaPipe } from './pipes/cita/count-cita.pipe';
     MedicoPipe,
     EspecialidadIdPipe,
     IdToNamePipe,
-    CountCitaPipe
+    CountCitaPipe,
+    FiltroEstadoPipe
     
   ],
   imports: [
@@ -34,8 +36,8 @@ import { CountCitaPipe } from './pipes/cita/count-cita.pipe';
     NgbModule,
     ReactiveFormsModule,
     CommonModule,
-    FormsModule
-  
+    FormsModule,
+    MatTableModule
     
   ],
   providers: [],
