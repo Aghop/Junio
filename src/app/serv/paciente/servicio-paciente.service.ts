@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Paciente } from 'src/app/interfaces/paciente';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +17,20 @@ export class ServicioPacienteService {
    * @params id - id del paciente
    * @return paciente - paciente
    */
-  public async ConsultarPaciente(id: number){
-   let paciente = await this.servicio.get(`${this.servidor}/paciente/${id}`).toPromise();
+  public getPacienteById(id: number){
+   let paciente = this.servicio.get(`${this.servidor}/api/paciente/${id}`);
    return paciente;
   }
 
-  public async ConsultarPacientes(){
-    let pacientes = await this.servicio.get(`${this.servidor}/paciente`).toPromise();
+  public async getPacientes(){
+    let pacientes = this.servicio.get(`${this.servidor}/api/paciente/all`);
     return pacientes;
    }
 
+   public addPaciente(paciente: Paciente){
+    let newPaciente = this.servicio.post<Paciente>(`${this.servidor}/api/paciente/`,paciente);
+    return newPaciente;
+  }
 
    /* ------------------------------ FALTA EL POST ----------------------------- */
 }

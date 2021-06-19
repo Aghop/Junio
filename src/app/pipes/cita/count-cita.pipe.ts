@@ -1,0 +1,20 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { Cita } from 'src/app/interfaces/cita';
+
+@Pipe({
+  name: 'countCita'
+})
+export class CountCitaPipe implements PipeTransform {
+
+  transform(value: Cita[], arg: unknown): unknown {
+   let cant=0;
+    for (var i = 0; i < value.length; i++) {
+      if (value[i].idEstado == arg) {
+        cant++;
+        
+      }
+    }
+    return cant;
+  }
+
+}

@@ -17,15 +17,24 @@ export class ServicioCitasService {
    * @params id - id del paciente
    * @return citas - lista de citas del paciente
    */
-  public ConsultarCitasPaciente(id: number){
-   let citas = this.servicio.get<Cita[]>(`${this.servidor}/api/cita/${id}/all`).toPromise();
+  public getCitasPaciente(id: number){
+   let citas = this.servicio.get<Cita[]>(`${this.servidor}/api/cita/${id}/all`);
    return citas;
   }
 
-  public BorrarCita(id: number){
-    let citas = this.servicio.get(`${this.servidor}/api/delete/cita/${id}`).toPromise();
+  public deleteCita(id: number){
+    let citas = this.servicio.get(`${this.servidor}/api/delete/cita/${id}`);
     return citas;
    }
 
+   public addCita(cita: Cita){
+    let citas = this.servicio.post<Cita>(`${this.servidor}/api/cita/`,cita);
+    return citas;
+  }
+
+  public updateCita(cita: Cita){
+    let citas = this.servicio.patch<Cita>(`${this.servidor}/api/cita/update/${cita.idcita}`,cita);
+    return citas;
+  }
    /* ------------------------- FALTA EL POST Y UPDATE ------------------------- */
 }

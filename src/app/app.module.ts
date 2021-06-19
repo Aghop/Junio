@@ -11,6 +11,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EstadoPipe } from './pipes/estados/estado.pipe';
 import { MedicoPipe } from './pipes/medicos/medico.pipe';
+import { EspecialidadIdPipe } from './pipes/especialidad/especialidad-id.pipe';
+import { IdToNamePipe } from './pipes/especialidad/id-to-name.pipe';
+import { CountCitaPipe } from './pipes/cita/count-cita.pipe';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { MedicoPipe } from './pipes/medicos/medico.pipe';
     NavVarComponent,
     ListarCitasComponent,
     EstadoPipe,
-    MedicoPipe
+    MedicoPipe,
+    EspecialidadIdPipe,
+    IdToNamePipe,
+    CountCitaPipe
     
   ],
   imports: [

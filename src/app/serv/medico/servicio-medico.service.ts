@@ -17,19 +17,24 @@ export class ServicioMedicoService {
    * @params id - id del medico
    * @return paciente - medico
    */
-  public ConsultarMedico(id: number){
-   let medico = this.servicio.get<Medico>(`${this.servidor}/api/medico/${id}`).toPromise();
+  public getMedicoById(id: number){
+   let medico = this.servicio.get<Medico>(`${this.servidor}/api/medico/${id}`);
    return medico;
   }
-  public ConsultarMedicos(){
-    let medicos =  this.servicio.get<Medico[]>(`${this.servidor}/api/medico/all`).toPromise();
+  public getMedicos(){
+    let medicos =  this.servicio.get<Medico[]>(`${this.servidor}/api/medico/all`);
     return medicos;
    }
 
-   public BorrarMedico(id: number){
-    let citas = this.servicio.get(`${this.servidor}/api/medico/delete/${id}`).toPromise();
+   public deleteMedico(id: number){
+    let citas = this.servicio.get(`${this.servidor}/api/medico/delete/${id}`);
     return citas;
    }
 
-   /* ------------------------------ FALTA EL POST ----------------------------- */
+   public addMedico(medico: Medico){
+     let citas = this.servicio.post<Medico>(`${this.servidor}/api/medico/`,medico);
+     return citas;
+   }
+
+
 }

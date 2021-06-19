@@ -1,7 +1,42 @@
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action"
-        *ngFor="let cita of citas"
-    >
-    {{cita.idPaciente}} {{cita.idEstado | estado | titlecase }} {{ medico | medico: cita.idMedico }} {{cita.fechaHora | date: 'short'}} {{cita.descripcion}}
-</a>
+<ng-container *ngIf="(citas$ | async); let citas;">
+<ng-container *ngIf="(medico$ | async); let medico;">
+<ng-container *ngIf="(especialidad$ | async); let especialidad;">
+
+    
+<div class="btn-group btn-group-toggle" role="group" aria-label="Basic example">
+
+
+    <label class="btn btn-secondary" for="option1">
+        <input type="radio" class="btn-check" name="options" id="option1" [(ngModel)]="radioSelected" value="option1"
+            autocomplete="off" checked hidden> Citas abiertas ({{citas | countCita: 1}})
+    </label>
+
+    <label class="btn btn-secondary" for="option2">
+        <input type="radio" class="btn-check" name="options" id="option2" [(ngModel)]="radioSelected" value="option2"
+            autocomplete="off" hidden> Historial de citas
+    </label>
+
 </div>
+
+<div class="list-group" *ngIf="radioSelected == 'option1'">
+    <ng-container *ngFor="let cita of citas">
+        <a href="#" class="list-group-item list-group-item-action"
+        *ngIf="cita.idEstado == 1">
+            {{cita.fechaHora | date: 'short'}} {{ medico | medico: cita.idMedico }} {{ medico | especialidadId:
+            cita.idMedico | idToName: especialidad}}
+        </a>
+    </ng-container>
+</div>
+
+<div class="list-group" *ngIf="radioSelected == 'option2'">
+    <ng-container *ngFor="let cita of citas">
+        <a href="#" class="list-group-item list-group-item-action" 
+        *ngIf="cita.idEstado == 2 || cita.idEstado == 3">
+            {{cita.fechaHora | date: 'short'}} {{ medico | medico: cita.idMedico }} {{ medico | especialidadId:
+            cita.idMedico | idToName: especialidad}} {{cita.descripcion}} {{cita.idEstado | estado | titlecase }}
+        </a>
+    </ng-container>
+</div>
+</ng-container>
+</ng-container>
+</ng-container>

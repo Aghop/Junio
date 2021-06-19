@@ -14,22 +14,22 @@ export class ServicioExtrasService {
     this.servidor= "http://127.0.0.1:3000"
   }
 
-  public ConsultarRegiones(id: number){
-    let regiones = this.servicio.get<Region[]>(`${this.servidor}/region`).toPromise();
+  public getRegiones(id: number){
+    let regiones = this.servicio.get<Region[]>(`${this.servidor}/api/region/all`);
     return regiones;
    }
 
-   public ConsultarComunas(id: number){
-    let comunas =  this.servicio.get<Comuna[]>(`${this.servidor}/comuna`).toPromise();
+   public getComunas(id: number){
+    let comunas =  this.servicio.get<Comuna[]>(`${this.servidor}/api/comuna/all`);
     return comunas;
    }
 
-   public ConsultarEspecialidades(id: number){
-    let especialidades =  this.servicio.get<Especialidad[]>(`${this.servidor}/especialidad`).toPromise();
+   public getEspecialidades(){
+    let especialidades =  this.servicio.get<Especialidad[]>(`${this.servidor}/api/especialidad/all`);
     return especialidades;
    }
-   public ConsultarCentros(id: number){
-    let centrosMedicos =  this.servicio.get<CentroMedico[]>(`${this.servidor}/centroMedico`).toPromise();
+   public getCentros(){
+    let centrosMedicos =  this.servicio.get<CentroMedico[]>(`${this.servidor}/api/centroMedico/all`);
     return centrosMedicos;
    }
  
