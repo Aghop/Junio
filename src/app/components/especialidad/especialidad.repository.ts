@@ -7,7 +7,6 @@ async function getEspecialidades(){
     let rows;
     let connection = await mariaDBModule.connect();
     rows = await connection.query("SELECT * FROM especialidad");
-    console.log(rows[0]);
     return rows;
 };
 

@@ -58,7 +58,7 @@ router.get('/:id/all', function (req, res) { return __awaiter(void 0, void 0, vo
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
-                res.send({ error: "Unexpected error" });
+                res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
@@ -80,7 +80,7 @@ router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [3 /*break*/, 4];
             case 3:
                 error_2 = _a.sent();
-                res.send({ error: "Unexpected error" });
+                res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
@@ -92,7 +92,6 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
         switch (_a.label) {
             case 0:
                 cita = req.body;
-                console.log(req.body);
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
@@ -103,7 +102,7 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [3 /*break*/, 4];
             case 3:
                 error_3 = _a.sent();
-                res.send({ error: "Unexpected error" });
+                res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
@@ -125,7 +124,30 @@ router.delete('/delete/:id', function (req, res) { return __awaiter(void 0, void
                 return [3 /*break*/, 4];
             case 3:
                 error_4 = _a.sent();
-                res.send({ error: "Unexpected error" });
+                res.status(500).send({ error: "Unexpected error" });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
+router.put('/update/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var cita, updatedCita, error_5;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                cita = req.body;
+                console.log(req.body);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, cita_controller_1.default.updateCita(cita)];
+            case 2:
+                updatedCita = _a.sent();
+                res.send(updatedCita);
+                return [3 /*break*/, 4];
+            case 3:
+                error_5 = _a.sent();
+                res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }

@@ -55,7 +55,7 @@ router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();
-                res.send({ error: "Unexpected error" });
+                res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

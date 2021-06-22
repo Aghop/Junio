@@ -66,6 +66,14 @@ function main() {
                     }));
                     app.use(cors_1.default());
                     app.use.apply(app, __spreadArray(['/api'], components_1.default));
+                    app.use('*', function (req, res) {
+                        if (req.baseUrl === '') {
+                            res.send("Api Working");
+                        }
+                        else {
+                            res.status(404).send("Not Found");
+                        }
+                    });
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -74,7 +82,7 @@ function main() {
                     _a.sent();
                     console.log('-CONNECTED SUCCESSFULLY-');
                     app.listen(Configuracion, function () {
-                        console.log("SERVER LISTENING " + Configuracion.server + ": " + Configuracion.port);
+                        console.log("SERVER LISTENING " + Configuracion.server + ":" + Configuracion.port);
                     });
                     return [3 /*break*/, 4];
                 case 3:

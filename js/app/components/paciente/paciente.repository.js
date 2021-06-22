@@ -51,7 +51,6 @@ function getPacientes() {
                     return [4 /*yield*/, connection.query("SELECT * FROM paciente")];
                 case 2:
                     rows = _a.sent();
-                    console.log(rows[0]);
                     return [2 /*return*/, rows];
             }
         });

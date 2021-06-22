@@ -24,6 +24,10 @@ function addCita(cita: Cita){
 function deleteCita (id: String) {
     return citaRepository.deleteCita(id);
 }
+
+function updateCita(cita: Cita){
+    return citaRepository.updateCita(cita);
+}
   
 
-export default { getCita, getCitaById, addCita, deleteCita }
+export default { getCita, getCitaById, addCita, deleteCita, updateCita }

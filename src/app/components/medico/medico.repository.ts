@@ -7,7 +7,6 @@ async function getMedicos(){
     let rows;
     let connection = await mariaDBModule.connect();
     rows = await connection.query("SELECT * FROM medico");
-    //console.log(rows[0]);
     return rows;
 };
 

@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Response , Request } from "express";
 import cors from "cors";
 import components from "./components";
 import mariaDBModule from "./modules/mariaDB.module";
@@ -23,7 +23,13 @@ async function main() {
     app.use(cors());
 
     app.use('/api', ...components);
-
+     app.use('*', (req: Request, res: Response)=>{
+         if(req.baseUrl === ''){
+             res.send("Api Working");
+     }else{
+         res.status(404).send("Not Found");
+     }
+     });
 
 
     /* ------------------------------ BASE DE DATOS ----------------------------- */
@@ -35,7 +41,7 @@ async function main() {
         console.log('-CONNECTED SUCCESSFULLY-');
         
         app.listen(Configuracion, () => {
-            console.log(`SERVER LISTENING ${Configuracion.server}: ${Configuracion.port}`);
+            console.log(`SERVER LISTENING ${Configuracion.server}:${Configuracion.port}`);
         });
     } catch (error) {
         console.log('-CONNECTION FAILED-');

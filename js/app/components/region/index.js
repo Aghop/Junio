@@ -7,4 +7,7 @@ var express_1 = __importDefault(require("express"));
 var region_network_1 = __importDefault(require("./region.network"));
 var region = express_1.default();
 region.use('/region', region_network_1.default);
+// region.use('*', (req: Request, res: Response)=>{
+//     res.status(404).send("Not found");
+// });
 exports.default = region;

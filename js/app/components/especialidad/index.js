@@ -7,4 +7,7 @@ var express_1 = __importDefault(require("express"));
 var especialidad_network_1 = __importDefault(require("./especialidad.network"));
 var especialidad = express_1.default();
 especialidad.use('/especialidad', especialidad_network_1.default);
+// especialidad.use('*', (req: Request, res: Response)=>{
+//     res.status(404).send("Not found");
+// });
 exports.default = especialidad;

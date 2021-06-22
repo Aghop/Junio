@@ -10,7 +10,7 @@ router.get('/all', async (req: Request, res: Response) => {
         pacientes = await pacienteController.getPacientes();
         res.send(pacientes);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         paciente = await pacienteController.getPacienteById(id);
         res.send(paciente);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 
@@ -32,7 +32,7 @@ router.post('/', async (req: Request, res: Response) => {
         const newPaciente = await pacienteController.addPaciente(paciente);
         res.send(newPaciente);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 

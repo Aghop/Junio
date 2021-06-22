@@ -51,7 +51,6 @@ function getCitas(id) {
                     return [4 /*yield*/, connection.query("SELECT * FROM cita WHERE idPaciente=?", id)];
                 case 2:
                     rows = _a.sent();
-                    console.log(rows[0]);
                     return [2 /*return*/, rows];
             }
         });
@@ -106,4 +105,20 @@ function deleteCita(id) {
         });
     });
 }
-exports.default = { getCitas: getCitas, getCitaById: getCitaById, addCita: addCita, deleteCita: deleteCita };
+function updateCita(cita) {
+    return __awaiter(this, void 0, void 0, function () {
+        var row, connection;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    return [4 /*yield*/, connection.query("UPDATE `cita` SET `fechaHora`='" + cita.fechaHora + "',`descripcion`='" + cita.descripcion + "',`idPaciente`='" + cita.idPaciente + "',`idMedico`='" + cita.idMedico + "',`idEstado`='" + cita.idEstado + "' WHERE idcita=?", cita.idcita)];
+                case 2:
+                    row = _a.sent();
+                    return [2 /*return*/, row];
+            }
+        });
+    });
+}
+exports.default = { getCitas: getCitas, getCitaById: getCitaById, addCita: addCita, deleteCita: deleteCita, updateCita: updateCita };

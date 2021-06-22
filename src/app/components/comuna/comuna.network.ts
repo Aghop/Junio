@@ -10,7 +10,7 @@ router.get('/all', async (req: Request, res: Response) => {
         comunas = await comunaController.getComunas();
         res.send(comunas);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 

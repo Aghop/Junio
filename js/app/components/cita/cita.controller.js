@@ -27,4 +27,7 @@ function addCita(cita) {
 function deleteCita(id) {
     return cita_repository_1.default.deleteCita(id);
 }
-exports.default = { getCita: getCita, getCitaById: getCitaById, addCita: addCita, deleteCita: deleteCita };
+function updateCita(cita) {
+    return cita_repository_1.default.updateCita(cita);
+}
+exports.default = { getCita: getCita, getCitaById: getCitaById, addCita: addCita, deleteCita: deleteCita, updateCita: updateCita };

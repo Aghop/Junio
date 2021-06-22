@@ -10,7 +10,7 @@ router.get('/all', async (req: Request, res: Response) => {
         medicos = await medicoController.getMedicos();
         res.send(medicos);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 
@@ -21,7 +21,7 @@ router.get('/:id', async (req: Request, res: Response) => {
         medico = await medicoController.getMedicoById(id);
         res.send(medico);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 
@@ -32,7 +32,7 @@ router.post('/', async (req: Request, res: Response) => {
         const newMedico = await medicoController.addMedico(medico);
         res.send(newMedico);
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 });
 router.delete('/delete/:id', async (req:Request, res: Response) =>{
@@ -42,7 +42,7 @@ router.delete('/delete/:id', async (req:Request, res: Response) =>{
         medico = await medicoController.deleteMedico(id);
         res.send("MEDICO-ELIMINADO");
     } catch (error) {
-        res.send({ error: "Unexpected error" })
+        res.status(500).send({ error: "Unexpected error" })
     }
 })
 
