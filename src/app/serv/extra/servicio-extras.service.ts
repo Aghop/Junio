@@ -14,12 +14,12 @@ export class ServicioExtrasService {
     this.servidor= "http://127.0.0.1:3000"
   }
 
-  public getRegiones(id: number){
+  public getRegiones(){
     let regiones = this.servicio.get<Region[]>(`${this.servidor}/api/region/all`);
     return regiones;
    }
 
-   public getComunas(id: number){
+   public getComunas(){
     let comunas =  this.servicio.get<Comuna[]>(`${this.servidor}/api/comuna/all`);
     return comunas;
    }

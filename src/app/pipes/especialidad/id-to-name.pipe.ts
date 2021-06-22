@@ -2,9 +2,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Especialidad } from 'src/app/interfaces/especialidad';
 
 @Pipe({
-  name: 'idToName'
+  name: 'idToNameEspecialidad'
 })
-export class IdToNamePipe implements PipeTransform {
+export class IdToNamePipeEspecialidad implements PipeTransform {
 
   transform(value: unknown, args: Especialidad[]): unknown {
     for (var i = 0; i < args.length; i++) {

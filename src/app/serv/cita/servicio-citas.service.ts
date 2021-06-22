@@ -33,7 +33,7 @@ export class ServicioCitasService {
   }
 
   public updateCita(cita: Cita){
-    let citas = this.servicio.patch<Cita>(`${this.servidor}/api/cita/update/${cita.idcita}`,cita);
+    let citas = this.servicio.put<Cita>(`${this.servidor}/api/cita/update/`,cita);
     return citas;
   }
    /* ------------------------- FALTA EL POST Y UPDATE ------------------------- */
