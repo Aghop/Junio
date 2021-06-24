@@ -1,3 +1,4 @@
+import admin from "./admin";
 import centroMedico from "./centroMedico";
 import cita from "./cita";
 import comuna from "./comuna";
@@ -14,7 +15,8 @@ const components= [
     especialidad,
     medico,
     paciente,
-    region
+    region,
+    admin
 ];
 
 export default components;
