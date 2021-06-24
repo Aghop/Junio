@@ -14,11 +14,11 @@ import { ServicioCitasService } from 'src/app/serv/cita/servicio-citas.service';
 export class CancelarCitaComponent implements OnInit, OnDestroy {
   @Input() cita: Cita;
   public cancelForm: FormGroup;
-public citaSubscription: Subscription;
+  public citaSubscription: Subscription;
   constructor(
 
     public servicioCitas: ServicioCitasService,
-    
+
     public activeModal: NgbActiveModal,
     private _builder: FormBuilder
 
@@ -27,9 +27,9 @@ public citaSubscription: Subscription;
       razon: ["", Validators.required],
       accept: [null, Validators.required],
     })
-  } 
+  }
   ngOnDestroy(): void {
-    this.citaSubscription.unsubscribe();
+    
   }
   ;
 
@@ -41,7 +41,7 @@ public citaSubscription: Subscription;
     this.cita.descripcion = this.cancelForm.value.razon;
     this.cita.idEstado = 2;
 
-    this.citaSubscription = this.servicioCitas.updateCita(this.cita).subscribe(() => {
+   this.servicioCitas.updateCita(this.cita).subscribe(() => {
       console.log('Content updated successfully!')
     })
     window.location.reload();

@@ -30,6 +30,14 @@ import { ComunasByRegionPipe } from './pipes/comunas/comunas-by-region.pipe';
 import { ListarMedicosComponent } from './components/listar-medicos/listar-medicos.component';
 import { FiltrarMedicosComponent } from './components/filtrar-medicos/filtrar-medicos.component';
 import { IdToNameCentroPipe } from './pipes/centrosMedicos/id-to-name-centro.pipe';
+import { AgendarHoraComponent } from './components/agendar-hora/agendar-hora.component';
+import { HoraYFechaComponent } from './components/hora-yfecha/hora-yfecha.component';
+import { BusquedaPorComunaPipe } from './pipes/comunas/busqueda-por-comuna.pipe';
+import { IdToNameComunaPipe } from './pipes/comunas/id-to-name-comuna.pipe';
+import { BusquedaPorNombrePipe } from './pipes/nombres/busqueda-por-nombre.pipe';
+import { BusquedaPorRegionPipe } from './pipes/region/busqueda-por-region.pipe';
+import { IdToNameRegionPipe } from './pipes/region/id-to-name-region.pipe';
+import { ListarPacientesComponent } from './components/listar-pacientes/listar-pacientes.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +56,15 @@ import { IdToNameCentroPipe } from './pipes/centrosMedicos/id-to-name-centro.pip
     ComunasByRegionPipe,
     ListarMedicosComponent,
     FiltrarMedicosComponent,
-    IdToNameCentroPipe
+    IdToNameCentroPipe,
+    AgendarHoraComponent,
+    HoraYFechaComponent,
+    BusquedaPorComunaPipe,
+    IdToNameComunaPipe,
+    BusquedaPorNombrePipe,
+    BusquedaPorRegionPipe,
+    IdToNameRegionPipe,
+    ListarPacientesComponent
 
   ],
   imports: [

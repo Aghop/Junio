@@ -18,12 +18,12 @@ export class ServicioPacienteService {
    * @return paciente - paciente
    */
   public getPacienteById(id: number){
-   let paciente = this.servicio.get(`${this.servidor}/api/paciente/${id}`);
+   let paciente = this.servicio.get<Paciente>(`${this.servidor}/api/paciente/${id}`);
    return paciente;
   }
 
-  public async getPacientes(){
-    let pacientes = this.servicio.get(`${this.servidor}/api/paciente/all`);
+  public getPacientes(){
+    let pacientes = this.servicio.get<Paciente[]>(`${this.servidor}/api/paciente/all`);
     return pacientes;
    }
 

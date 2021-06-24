@@ -7,19 +7,17 @@ import { Comuna } from 'src/app/interfaces/comuna';
 export class ComunasByRegionPipe implements PipeTransform {
 
   transform(value: Comuna[], arg: number): unknown {
-    
-    
-     let fruits: Array<Comuna>=[];
-     console.log('id: ',arg);
-     for (var i = 0; i < value.length; i++) {
-       if (value[i].idRegion == arg) {
-         fruits.push(value[i]);
-       }
-     };
-     console.log(fruits);
-     return fruits;
-  
-
- 
+    let fruits: Array<Comuna> = [];
+    try {
+      console.log('id: ', arg);
+      for (var i = 0; i < value.length; i++) {
+        if (value[i].idRegion == arg) {
+          fruits.push(value[i]);
+        }
+      };
+      console.log(fruits);
+    } catch (error) {
+    }
+    return fruits;
   }
 }
