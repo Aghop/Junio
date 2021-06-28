@@ -11,17 +11,17 @@ import { ServicioMedicoService } from 'src/app/serv/medico/servicio-medico.servi
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CancelarCitaComponent } from '../cancelar-cita/cancelar-cita.component';
 import { ReprogramarCitaComponent } from '../reprogramar-cita/reprogramar-cita.component';
-import { AgendarHoraComponent } from '../agendar-hora/agendar-hora.component';
+import { EditarDescripcionComponent } from '../editar-descripcion/editar-descripcion.component';
 
 
 
 @Component({
-  selector: 'app-listar-citas',
-  templateUrl: './listar-citas.component.html',
-  styleUrls: ['./listar-citas.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-listar-editcitas',
+  templateUrl: './listar-editcitas.component.html',
+  styleUrls: ['./listar-editcitas.component.scss']
 })
-export class ListarCitasComponent implements OnInit, OnDestroy{
+export class ListarEditcitasComponent implements OnInit, OnDestroy {
+
   public id: number;
   public citas$: Observable<Cita[]>;
   public cantCitas: number;
@@ -37,8 +37,7 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
 
 
   public radioSelected: string;
-  public displayedColumns1 = ['Fecha', 'Medico', 'Especialidad', 'Reprogramar', 'Cancelar'];
-  public displayedColumns2 = ['Fecha', 'Medico', 'Especialidad', 'Descripcion', 'Estado'];
+  public displayedColumns = ['Fecha', 'Medico', 'Especialidad', 'Editar', 'Estado','Eliminar'];
   constructor(
     public servicioCitas: ServicioCitasService, 
     public servicioMedicos: ServicioMedicoService, 
@@ -61,13 +60,11 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(parametros => {
       this.id = parametros['id'];
-    });
-
-    let datos = JSON.parse(localStorage.getItem('hospital'));
-    if (!datos || datos.id != this.id) {
-      window.location.href="/login";
-    };
-    
+    })
+    let datos = JSON.parse(localStorage.getItem('hospitalAdmin'));
+    if (!datos) {
+      window.location.href=`/negado`;
+    }
     this.radioSelected = "option1";
     this.citas$ = this.servicioCitas.getCitasPaciente(this.id);
 
@@ -77,19 +74,15 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
 
   }
 
-  onClickCancel(cita: Cita) {
-    const modalRef = this.modalService.open(CancelarCitaComponent);
-    modalRef.componentInstance.cita = cita;
+  onClickDelete(id: string){
+    this.servicioCitas.deleteCita(id).subscribe(() => {
+      console.log('Content deleted successfully!')
+      window.location.reload();
+    });
   }
-
-  onClickRepro(cita: Cita) {
-    const modalRef = this.modalService.open(ReprogramarCitaComponent);
+  onClickEdit(cita: Cita) {
+    const modalRef = this.modalService.open(EditarDescripcionComponent);
     modalRef.componentInstance.cita = cita;
-  }
-
-  onClickAgendar(){
-    const modalRef = this.modalService.open(AgendarHoraComponent);
-    modalRef.componentInstance.id = this.id;
   }
 
 }

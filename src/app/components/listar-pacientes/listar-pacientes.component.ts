@@ -100,6 +100,12 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(parametros => {
       this.id = parametros['id'];
     })
+    let datos = JSON.parse(localStorage.getItem('hospitalAdmin'));
+    if (!datos) {
+      window.location.href=`/negado`;
+    }
+
+
     this.radioSelected = "option1";
     this.comunaSubscription = this.comunas$.subscribe((comunasList: Comuna[]) => this.comunas = comunasList);
     this.regiones$ = this.servicioExtra.getRegiones();

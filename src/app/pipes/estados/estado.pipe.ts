@@ -9,13 +9,13 @@ export class EstadoPipe implements PipeTransform {
     switch (value) {
       
       case 1:
-        return "<span class='abierta'>Abierta</span>"
+        return "<span class='abierta estado'>Abierta</span>"
 
       case 2:
-        return "<span class='cancelada'>Cancelada</span>"
+        return "<span class='cancelada estado'>Cancelada</span>"
        
       case 3:
-        return "<span class='concluida'>Concluida</span>"
+        return "<span class='concluida estado'>Concluida</span>"
       
       default:
 

@@ -1,0 +1,47 @@
+<ng-container *ngIf="(citas$ | async); let citas;">
+
+    <div class="list-group" >
+
+        <!-- <a class="list-group-item list-group-item-action" *ngIf="cita.idEstado == 1"> -->
+        <table mat-table [dataSource]="(citas$ | async)" matSort class="mat-elevation-z8 zindex">
+
+            <ng-container matColumnDef="Fecha">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Hora </th>
+                <td mat-cell *matCellDef="let cita"> {{cita.fechaHora | date: 'short'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Medico">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Medico </th>
+                <td mat-cell *matCellDef="let cita"> {{ medico | medico: cita.idMedico }} </td>
+            </ng-container>
+            <ng-container matColumnDef="Especialidad">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Especialidad </th>
+                <td mat-cell *matCellDef="let cita"> {{ medico | especialidadId: cita.idMedico |
+                    idToNameEspecialidad: especialidad}}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Editar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar Descripcion </th>
+                <td mat-cell *matCellDef="let cita"><button (click)="onClickEdit(cita)" class="btn btn-link">
+                        Editar Descripcion
+                    </button></td>
+            </ng-container>
+            <ng-container matColumnDef="Estado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                <td mat-cell *matCellDef="let cita" [innerHTML]=" cita.idEstado | estado "> 
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="Eliminar">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+                <td mat-cell *matCellDef="let cita" >
+                    <button type="button" class="close" aria-label="Close" (click)="onClickDelete(cita.idcita)"><span
+                        aria-hidden="true">&times;</span></button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </div>
+
+</ng-container>
