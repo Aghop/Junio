@@ -120,7 +120,7 @@ router.delete('/delete/:id', function (req, res) { return __awaiter(void 0, void
                 return [4 /*yield*/, cita_controller_1.default.deleteCita(id)];
             case 2:
                 cita = _a.sent();
-                res.send("CITA-ELIMINADA");
+                res.send(cita);
                 return [3 /*break*/, 4];
             case 3:
                 error_4 = _a.sent();

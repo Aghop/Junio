@@ -8,6 +8,14 @@ function getPacientes() {
     return paciente_repository_1.default.getPacientes();
 }
 ;
+function getPacienteLogin(username, password) {
+    var paciente = paciente_repository_1.default.getPacienteLogin(username, password);
+    if (paciente != undefined) {
+        return paciente;
+    }
+    else
+        return null;
+}
 function getPacienteById(id) {
     var paciente = paciente_repository_1.default.getPacienteById(id);
     if (paciente != undefined) {
@@ -19,4 +27,4 @@ function getPacienteById(id) {
 function addPaciente(paciente) {
     return paciente_repository_1.default.addPaciente(paciente);
 }
-exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente };
+exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente, getPacienteLogin: getPacienteLogin };

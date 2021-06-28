@@ -1,7 +1,7 @@
 import adminRepository from "./admin.repository";
 
-function getAdmins() {
-    let admins= adminRepository.getAdmins();
+function getAdmin(username: string ,password: string) {
+    let admins= adminRepository.getAdmin(username,password);
     if (admins != undefined) {
         return admins;
     } else
@@ -9,4 +9,4 @@ function getAdmins() {
 };
 
 
-export default { getAdmins}
+export default { getAdmin}

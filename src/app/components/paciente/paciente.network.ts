@@ -14,6 +14,20 @@ router.get('/all', async (req: Request, res: Response) => {
     }
 });
 
+router.get('/login', async (req: Request, res: Response) => {
+    let pacientes;
+    const username:any = req.query.username;
+    const password:any = req.query.password;
+
+
+    try {
+        pacientes = await pacienteController.getPacienteLogin(username,password);
+        res.send(pacientes);
+    } catch (error) {
+        res.status(500).send({ error: "Unexpected error" })
+    }
+});
+
 router.get('/:id', async (req: Request, res: Response) => {
     let id = req.params.id;
     let paciente;

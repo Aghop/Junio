@@ -24,7 +24,7 @@ async function addCita(cita: Cita){
     return row;
 }
 
-async function deleteCita(id: String){
+async function deleteCita(id: string){
         let row;
         let connection = await mariaDBModule.connect();
         row = await connection.query("DELETE FROM cita WHERE idcita=?", id);

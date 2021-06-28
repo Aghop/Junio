@@ -42,22 +42,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var admin_controller_1 = __importDefault(require("./admin.controller"));
 var router = express_1.default.Router();
-router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var admins, error_1;
+router.get('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var admins, username, password, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, admin_controller_1.default.getAdmins()];
+                username = req.query.username;
+                password = req.query.password;
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, admin_controller_1.default.getAdmin(username, password)];
+            case 2:
                 admins = _a.sent();
                 res.send(admins);
-                return [3 /*break*/, 3];
-            case 2:
+                return [3 /*break*/, 4];
+            case 3:
                 error_1 = _a.sent();
                 res.status(500).send({ error: "Unexpected error" });
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); });

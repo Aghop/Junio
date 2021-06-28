@@ -5,6 +5,15 @@ function getPacientes() {
     return pacienteRepository.getPacientes();
 };
 
+function getPacienteLogin(username: String,password: String){
+    let paciente = pacienteRepository.getPacienteLogin(username,password);
+    if (paciente != undefined) {
+        return paciente;
+    } else
+        return null;
+}
+
+
 function getPacienteById(id: String) {
     let paciente = pacienteRepository.getPacienteById(id);
     if (paciente != undefined) {
@@ -17,4 +26,4 @@ function addPaciente(paciente: Paciente){
     return pacienteRepository.addPaciente(paciente);
 }
 
-export default { getPacientes, getPacienteById, addPaciente }
+export default { getPacientes, getPacienteById, addPaciente, getPacienteLogin }

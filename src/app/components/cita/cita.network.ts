@@ -42,7 +42,7 @@ router.delete('/delete/:id', async (req: Request, res: Response) => {
     let cita;
     try {
         cita = await citaController.deleteCita(id);
-        res.send("CITA-ELIMINADA");
+        res.send(cita);
     } catch (error) {
         res.status(500).send({ error: "Unexpected error" })
     }

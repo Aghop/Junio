@@ -40,7 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var mariaDB_module_1 = __importDefault(require("../../modules/mariaDB.module"));
-function getAdmins() {
+function getAdmin(username, password) {
     return __awaiter(this, void 0, void 0, function () {
         var rows, connection;
         return __generator(this, function (_a) {
@@ -48,7 +48,7 @@ function getAdmins() {
                 case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
                 case 1:
                     connection = _a.sent();
-                    return [4 /*yield*/, connection.query("SELECT * FROM admin")];
+                    return [4 /*yield*/, connection.query("SELECT * FROM admin WHERE username=? and password=md5(?)", [username, password])];
                 case 2:
                     rows = _a.sent();
                     return [2 /*return*/, rows];
@@ -57,4 +57,4 @@ function getAdmins() {
     });
 }
 ;
-exports.default = { getAdmins: getAdmins };
+exports.default = { getAdmin: getAdmin };

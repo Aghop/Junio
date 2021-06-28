@@ -61,8 +61,31 @@ router.get('/all', function (req, res) { return __awaiter(void 0, void 0, void 0
         }
     });
 }); });
+router.get('/login', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var pacientes, username, password, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                username = req.query.username;
+                password = req.query.password;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, paciente_controller_1.default.getPacienteLogin(username, password)];
+            case 2:
+                pacientes = _a.sent();
+                res.send(pacientes);
+                return [3 /*break*/, 4];
+            case 3:
+                error_2 = _a.sent();
+                res.status(500).send({ error: "Unexpected error" });
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
 router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var id, paciente, error_2;
+    var id, paciente, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -76,7 +99,7 @@ router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
                 res.send(paciente);
                 return [3 /*break*/, 4];
             case 3:
-                error_2 = _a.sent();
+                error_3 = _a.sent();
                 res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
@@ -84,7 +107,7 @@ router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
     });
 }); });
 router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var paciente, newPaciente, error_3;
+    var paciente, newPaciente, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -99,7 +122,7 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 res.send(newPaciente);
                 return [3 /*break*/, 4];
             case 3:
-                error_3 = _a.sent();
+                error_4 = _a.sent();
                 res.status(500).send({ error: "Unexpected error" });
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];

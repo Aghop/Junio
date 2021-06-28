@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var admin_repository_1 = __importDefault(require("./admin.repository"));
-function getAdmins() {
-    var admins = admin_repository_1.default.getAdmins();
+function getAdmin(username, password) {
+    var admins = admin_repository_1.default.getAdmin(username, password);
     if (admins != undefined) {
         return admins;
     }
@@ -13,4 +13,4 @@ function getAdmins() {
         return null;
 }
 ;
-exports.default = { getAdmins: getAdmins };
+exports.default = { getAdmin: getAdmin };

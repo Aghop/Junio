@@ -57,6 +57,22 @@ function getPacientes() {
     });
 }
 ;
+function getPacienteLogin(username, password) {
+    return __awaiter(this, void 0, void 0, function () {
+        var row, connection;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    return [4 /*yield*/, connection.query("SELECT * FROM paciente WHERE username=? and password=md5(?)", [username, password])];
+                case 2:
+                    row = _a.sent();
+                    return [2 /*return*/, row];
+            }
+        });
+    });
+}
 function getPacienteById(id) {
     return __awaiter(this, void 0, void 0, function () {
         var row, connection;
@@ -81,7 +97,7 @@ function addPaciente(paciente) {
                 case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
                 case 1:
                     connection = _a.sent();
-                    return [4 /*yield*/, connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "','" + paciente.password + "','" + paciente.idRegion + "','" + paciente.idComuna + "');")];
+                    return [4 /*yield*/, connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "',md5('" + paciente.password + "'),'" + paciente.idRegion + "','" + paciente.idComuna + "');")];
                 case 2:
                     row = _a.sent();
                     return [2 /*return*/, row];
@@ -89,4 +105,4 @@ function addPaciente(paciente) {
         });
     });
 }
-exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente };
+exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente, getPacienteLogin: getPacienteLogin };
