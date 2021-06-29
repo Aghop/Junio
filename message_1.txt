@@ -1,0 +1,176 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema mydb
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Schema citasmedicas
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema citasmedicas
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `citasmedicas` DEFAULT CHARACTER SET utf8 ;
+USE `citasmedicas` ;
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`admin`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`admin` (
+  `idadmin` INT(11) NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idadmin`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`centromedico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`centromedico` (
+  `idcentro` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `direccion` VARCHAR(45) NOT NULL,
+  `telefono` INT(9) NOT NULL,
+  PRIMARY KEY (`idcentro`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`especialidad`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`especialidad` (
+  `idespecialidad` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombreEspecialidad` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`idespecialidad`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 70
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`medico`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`medico` (
+  `idmedico` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellidos` VARCHAR(45) NULL DEFAULT NULL,
+  `idEspecialidad` INT(11) NULL DEFAULT NULL,
+  `idcentroMedico` INT(11) NOT NULL,
+  `rut` INT(11) NOT NULL,
+  `digVer` CHAR(1) NOT NULL,
+  PRIMARY KEY (`idmedico`),
+   `idcentroMedicoM` (`idcentroMedico` ASC) VISIBLE,
+   `idEspecialidadM` (`idEspecialidad` ASC) VISIBLE,
+  CONSTRAINT `idEspecialidadM`
+    FOREIGN KEY (`idEspecialidad`)
+    REFERENCES `citasmedicas`.`especialidad` (`idespecialidad`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `idcentroMedicoM`
+    FOREIGN KEY (`idcentroMedico`)
+    REFERENCES `citasmedicas`.`centromedico` (`idcentro`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`region`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`region` (
+  `idregion` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombreRegion` VARCHAR(45) NOT NULL,
+  `romano` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idregion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 16
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`comuna`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`comuna` (
+  `idcomuna` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombreComuna` VARCHAR(45) NOT NULL,
+  `idRegion` INT(11) NOT NULL,
+  PRIMARY KEY (`idcomuna`),
+   `idRegionC` (`idRegion` ASC) VISIBLE,
+  CONSTRAINT `idRegionC`
+    FOREIGN KEY (`idRegion`)
+    REFERENCES `citasmedicas`.`region` (`idregion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 347
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`paciente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`paciente` (
+  `idPaciente` INT(11) NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(45) NOT NULL,
+  `apellidos` VARCHAR(45) NULL DEFAULT NULL,
+  `rut` INT(11) NOT NULL,
+  `digVer` CHAR(1) NOT NULL,
+  `direccion` VARCHAR(45) NULL DEFAULT NULL,
+  `username` VARCHAR(16) NOT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `password` VARCHAR(32) NOT NULL,
+  `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP(),
+  `idRegion` INT(11) NULL DEFAULT NULL,
+  `idComuna` INT(11) NULL DEFAULT NULL,
+  `pregunta` INT(1) NOT NULL,
+  `respuesta` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idPaciente`),
+   `idComunaP` (`idComuna` ASC) VISIBLE,
+   `idRegionP` (`idRegion` ASC) VISIBLE,
+  CONSTRAINT `idComunaP`
+    FOREIGN KEY (`idComuna`)
+    REFERENCES `citasmedicas`.`comuna` (`idcomuna`),
+  CONSTRAINT `idRegionP`
+    FOREIGN KEY (`idRegion`)
+    REFERENCES `citasmedicas`.`region` (`idregion`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 24
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `citasmedicas`.`cita`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `citasmedicas`.`cita` (
+  `idcita` INT(11) NOT NULL AUTO_INCREMENT,
+  `fechaHora` DATETIME NOT NULL,
+  `descripcion` VARCHAR(255) NULL DEFAULT NULL,
+  `idPaciente` INT(11) NOT NULL,
+  `idMedico` INT(11) NULL DEFAULT NULL,
+  `idEstado` INT(11) NOT NULL,
+  PRIMARY KEY (`idcita`),
+   `idMedicoC` (`idMedico` ASC) VISIBLE,
+   `idPacienteC` (`idPaciente` ASC) VISIBLE,
+  CONSTRAINT `idMedicoC`
+    FOREIGN KEY (`idMedico`)
+    REFERENCES `citasmedicas`.`medico` (`idmedico`),
+  CONSTRAINT `idPacienteC`
+    FOREIGN KEY (`idPaciente`)
+    REFERENCES `citasmedicas`.`paciente` (`idPaciente`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 29
+DEFAULT CHARACTER SET = utf8;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
