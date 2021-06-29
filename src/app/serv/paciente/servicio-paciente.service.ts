@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Paciente } from 'src/app/interfaces/paciente';
 
@@ -32,5 +32,14 @@ export class ServicioPacienteService {
     return newPaciente;
   }
 
-   /* ------------------------------ FALTA EL POST ----------------------------- */
+  public validarPregunta(email: string,pregunta: number,respuesta: string):Observable<any>{
+    let headers = new HttpHeaders();
+    headers.append('Content-Type','application/json');
+    let paciente = this.servicio.get<Paciente>(`${this.servidor}/api/paciente/recuperar?email=${email}&pregunta=${pregunta}&respuesta=${respuesta}`);
+   return paciente;
+   }
+   public updateContra(paciente: Paciente){
+    let citas = this.servicio.put<Paciente>(`${this.servidor}/api/paciente/update/`,paciente);
+    return citas;
+  }
 }

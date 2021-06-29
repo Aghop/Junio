@@ -6,14 +6,17 @@ import { ListarPacientesComponent } from './components/listar-pacientes/listar-p
 import { ListarEditcitasComponent } from './components/listar-editcitas/listar-editcitas.component';
 import { LoginComponent } from './components/login/login.component';
 import { NegadoComponent } from './components/negado/negado.component';
+import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: ':username/cita/:id', component: ListarCitasComponent },
   { path: 'register', component: FormularioCrearCuentaComponent },
   { path: 'negado', component: NegadoComponent },
   { path: 'root', component: ListarPacientesComponent },
-  { path: 'root/:id', component: ListarEditcitasComponent }
+  { path: 'root/:id', component: ListarEditcitasComponent },
+  { path: 'recuperar', component: RecuperarContraComponent }
 ];
 
 @NgModule({

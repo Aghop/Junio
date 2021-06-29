@@ -1,162 +1,197 @@
-<ng-container *ngIf="(regiones$ | async); let regiones;">
+<div class="row justify-content-center align-items-center">
+    <ng-container *ngIf="(regiones$ | async); let regiones;">
 
-    <div class="card">
-        <h4 class="card-header">Login</h4>
-        <div class="card-body">
-            <form [formGroup]="pacienteForm" (ngSubmit)="submit()" novalidate>
-                <ul>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>nombre</mat-label>
-                            <input type="text" formControlName="nombre" required matInput>
+        <div class="card" style="width:50%">
+            <h4 class="card-header">Crear cuenta</h4>
+            <div class="card-body col d-flex justify-content-center">
+                <form [formGroup]="pacienteForm" (ngSubmit)="submit()" novalidate>
+                    <ul>
+                        <div>
 
-                            <mat-error *ngIf="pacienteForm.get('nombre')?.errors?.required">
-                                El nombre es <strong>requerido</strong>
-                            </mat-error>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Nombre</mat-label>
+                                <input type="text" formControlName="nombre" required matInput>
 
-                        </mat-form-field>
+                                <mat-error *ngIf="pacienteForm.get('nombre')?.errors?.required">
+                                    El nombre es <strong>requerido</strong>
+                                </mat-error>
 
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>apellidos</mat-label>
-                            <input type="text" formControlName="apellidos" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('apellidos')?.errors?.required">
-                                Los apellidos son <strong>requeridos</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>RUT</mat-label>
-                            <input type="text" formControlName="rut" required matInput maxlength="8">
-
-                            <mat-error>
-                                El rut es <strong>invalido</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Digito Verificador</mat-label>
-                            <mat-select formControlName="digVerr" required>
-                                <mat-option value="{{digVer}}" *ngFor="let num of digVer" [value]="num.name"> {{
-                                    num.name }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="pacienteForm.get('digVerr')?.errors?.required">
-                                El digito verificador es <strong>requerido</strong>
-                            </mat-error>
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Direccion</mat-label>
-                            <input type="text" formControlName="direccion" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('direccion')?.errors?.required">
-                                El rut es <strong>requerido</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-
-                        <mat-form-field appearance="fill">
-                            <mat-label>Region</mat-label>
-                            <mat-select formControlName="region" (selectionChange)="onChange($event.value)" required>
-                                <mat-option value="{{regiones}}" *ngFor="let region of regiones"
-                                    [value]="region.idregion">
-                                    {{ region.nombreRegion }}</mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="pacienteForm.get('region')?.errors?.required">
-                                La region es <strong>requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
+                            </mat-form-field>
 
 
-                    </li>
-                    <li>
 
-                        <mat-form-field appearance="fill">
-                            <mat-label>Comuna</mat-label>
-                            <mat-select formControlName="comuna" required>
-                                <mat-option value="{{comunas}}" *ngFor="let comuna of comunasByRegion"
-                                    [value]="comuna.idcomuna"> {{ comuna.nombreComuna
-                                    }}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="pacienteForm.get('comuna')?.errors?.required">
-                                La comuna es <strong>requerida</strong>
-                            </mat-error>
-                        </mat-form-field>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Apellidos</mat-label>
+                                <input type="text" formControlName="apellidos" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('apellidos')?.errors?.required">
+                                    Los apellidos son <strong>requeridos</strong>
+                                </mat-error>
+
+                            </mat-form-field>
 
 
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>email</mat-label>
-                            <input type="email" formControlName="email" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('email')?.errors?.required">
-                                El email es <strong>requerido</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>user</mat-label>
-                            <input type="text" formControlName="user" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('user')?.errors?.required">
-                                El user es <strong>requerido</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>clave</mat-label>
-                            <input type="password" formControlName="password" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('password')?.errors?.required">
-                                La clave es <strong>requerida</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <mat-form-field appearance="fill">
-                            <mat-label>confirmacion clave</mat-label>
-                            <input type="password" formControlName="confirmacion" required matInput>
-
-                            <mat-error *ngIf="pacienteForm.get('confirmacion')?.errors?.required">
-                                La confirmacion de la clave es <strong>requerida</strong>
-                            </mat-error>
-
-                        </mat-form-field>
-
-                    </li>
-                    <li>
-                        <div class="botones">
-                            <button type="submit" id="submit" [disabled]="!pacienteForm.valid"
-                                mat-raised-button>Crear</button>
                         </div>
-                    </li>
+                        <div>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>RUT</mat-label>
+                                <input type="text" formControlName="rut" required matInput maxlength="8">
 
-                </ul>
-            </form>
+                                <mat-error>
+                                    El rut es <strong>invalido</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Digito Verificador</mat-label>
+                                <mat-select formControlName="digVerr" required>
+                                    <mat-option value="{{digVer}}" *ngFor="let num of digVer" [value]="num.name"> {{
+                                        num.name }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="pacienteForm.get('digVerr')?.errors?.required">
+                                    El digito verificador es <strong>requerido</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <li>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Direccion</mat-label>
+                                <input type="text" formControlName="direccion" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('direccion')?.errors?.required">
+                                    El rut es <strong>requerido</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+                        </li>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Region</mat-label>
+                                <mat-select formControlName="region" (selectionChange)="onChange($event.value)"
+                                    required>
+                                    <mat-option value="{{regiones}}" *ngFor="let region of regiones"
+                                        [value]="region.idregion">
+                                        {{ region.nombreRegion }}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="pacienteForm.get('region')?.errors?.required">
+                                    La region es <strong>requerida</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Comuna</mat-label>
+                                <mat-select formControlName="comuna" required>
+                                    <mat-option value="{{comunas}}" *ngFor="let comuna of comunasByRegion"
+                                        [value]="comuna.idcomuna"> {{ comuna.nombreComuna
+                                        }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="pacienteForm.get('comuna')?.errors?.required">
+                                    La comuna es <strong>requerida</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>E-mail</mat-label>
+                                <input type="email" formControlName="email" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('email')?.errors?.required">
+                                    El email es <strong>requerido</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Nombre de usuario</mat-label>
+                                <input type="text" formControlName="user" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('user')?.errors?.required">
+                                    El user es <strong>requerido</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+                        <div>
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Contraseña</mat-label>
+                                <input type="password" formControlName="password" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('password')?.errors?.required">
+                                    La contraseña es <strong>requerida</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Confirmacion contraseña</mat-label>
+                                <input type="password" formControlName="confirmacion" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('confirmacion')?.errors?.required">
+                                    La confirmacion de la contraseña es <strong>requerida</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+
+
+                        </div>
+                        <ng-container *ngIf="dist" >
+                           <p class="text-danger"> Las claves <strong>NO</strong> coinciden</p>
+                        </ng-container>
+                        <div>
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Pregunta</mat-label>
+                                <mat-select formControlName="pregunta"
+                                    (selectionChange)="onChangePregunta($event.value)" required>
+                                    <mat-option value="{{preguntas}}" *ngFor="let pregunta of preguntas"
+                                        [value]="pregunta.idPregunta">
+                                        {{ pregunta.texto }}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="pacienteForm.get('pregunta')?.errors?.required">
+                                    La pregunta es <strong>requerida</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+
+
+                            <mat-form-field appearance="fill" class="m-1">
+                                <mat-label>Respuesta</mat-label>
+                                <input type="text" formControlName="respuesta" required matInput>
+
+                                <mat-error *ngIf="pacienteForm.get('respuesta')?.errors?.required">
+                                    El respuesta es <strong>requerida</strong>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+                        <li>
+                            <div class="botones">
+                                <button type="submit" id="submit" [disabled]="!pacienteForm.valid"
+                                    mat-raised-button>Crear</button>
+                            </div>
+                        </li>
+
+                    </ul>
+                </form>
+            </div>
         </div>
-    </div>
-</ng-container>
+    </ng-container>
+</div>

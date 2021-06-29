@@ -30,8 +30,5 @@ export class LoginService {
     
     let admin = this.servicio.get<Admin>(`${this.servidor}/api/admin/login?username=${username}&password=${password}`);
    return admin;
-
-
   }
-
 }

@@ -23,7 +23,7 @@
     <div class="list-group" *ngIf="radioSelected == 'option1'">
 
         <!-- <a class="list-group-item list-group-item-action" *ngIf="cita.idEstado == 1"> -->
-        <table mat-table [dataSource]="(citas$ | async) | filtroEstado: '1'" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="(citas$ | async) | filtroEstado: '1'" matSort class="mat-elevation-z8 zindex">
 
             <ng-container matColumnDef="Fecha">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Hora </th>

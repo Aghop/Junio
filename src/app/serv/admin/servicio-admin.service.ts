@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Admin } from 'src/app/interfaces/admin';
 
 @Injectable({
@@ -14,4 +15,6 @@ export class ServicioAdminService {
     let admins = this.servicio.get<Admin[]>(`${this.servidor}/api/admin/all`);
     return admins;
    }
+
+   
 }

@@ -43,7 +43,7 @@ export class ReprogramarCitaComponent implements OnInit, OnDestroy {
     
     this.time = this.reproForm.value.timeInput;
     this.timeCut = this.time.split(':');
-    this.date.setHours( parseInt(this.timeCut[0],10) , parseInt(this.timeCut[1],10) );
+    this.date.setHours( parseInt(this.timeCut[0],10) - 4 , parseInt(this.timeCut[1],10) );
 
     this.cita.fechaHora = this.date;
 
@@ -56,7 +56,7 @@ export class ReprogramarCitaComponent implements OnInit, OnDestroy {
 
 
   onDateSelect(valor: NgbDateStruct) {
-    this.date.setFullYear(valor.year, valor.month, valor.day);
+    this.date.setFullYear(valor.year, valor.month - 1, valor.day);
   }
 
 

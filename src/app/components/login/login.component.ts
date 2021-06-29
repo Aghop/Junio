@@ -12,15 +12,17 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public radioSelected: string;
   public mensaje: string = "";
-
+  public siteKey: string;
 
   constructor(public form: FormBuilder, public loginService: LoginService) {
 
-
+    this.siteKey="6LcCE2IbAAAAALIyIxaeoCdeqH798uT0lD5nuTya";
+    
     this.loginForm = this.form.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      option: [null]
+      option: [null],
+      recaptcha: ['', Validators.required]
     });
   }
 

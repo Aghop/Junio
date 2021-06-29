@@ -1,0 +1,43 @@
+<div class="modal-header">
+    <h1 class="modal-title">Nueva contraseña</h1>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"><span
+            aria-hidden="true">&times;</span></button>
+
+</div>
+
+
+<div class="modal-body">
+
+    <form [formGroup]="nuevaForm" class="m-2">
+
+        
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Nueva contraseña</mat-label>
+            <input type="password" formControlName="password" required matInput>
+
+            <mat-error *ngIf="nuevaForm.get('password')?.errors?.required">
+                La contraseña es <strong>requerida</strong>
+            </mat-error>
+
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill" class="m-1">
+            <mat-label>Confirmacion contraseña</mat-label>
+            <input type="password" formControlName="confirmacion" required matInput>
+
+            <mat-error *ngIf="nuevaForm.get('confirmacion')?.errors?.required">
+                La confirmacion de la contraseña es <strong>requerida</strong>
+            </mat-error>
+
+        </mat-form-field>
+    </form>
+    <ng-container *ngIf="dist">
+        <p class="text-danger"> Las claves <strong>NO</strong> coinciden</p>
+    </ng-container>
+</div>
+
+<div class="modal-footer">
+    <button [disabled]="nuevaForm.invalid" type="button" class="btn btn-outline-dark"
+        (click)="onClickAccept()">Aceptar</button>
+</div>

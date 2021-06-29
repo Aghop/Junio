@@ -1,0 +1,59 @@
+<div class="row justify-content-center align-items-center">
+    <div class="card">
+        <h4 class="card-header">Recuperar contraseña</h4>
+        <div class="card-body col d-flex justify-content-center">
+            <form [formGroup]="recuForm" (ngSubmit)="onSubmit()">
+
+
+
+                <div class="form-group">
+                    <mat-form-field appearance="fill" class="m-1">
+                        <mat-label>E-mail</mat-label>
+                        <input type="email" formControlName="email" required matInput>
+
+                        <mat-error *ngIf="recuForm.get('email')?.errors?.required">
+                            El email es <strong>requerido</strong>
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div>
+
+                    <mat-form-field appearance="fill" class="m-1">
+                        <mat-label>Pregunta</mat-label>
+                        <mat-select formControlName="pregunta"
+                            (selectionChange)="onChangePregunta($event.value)" required>
+                            <mat-option value="{{preguntas}}" *ngFor="let pregunta of preguntas"
+                                [value]="pregunta.idPregunta">
+                                {{ pregunta.texto }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="recuForm.get('pregunta')?.errors?.required">
+                            La pregunta es <strong>requerida</strong>
+                        </mat-error>
+                    </mat-form-field>
+
+
+
+                    <mat-form-field appearance="fill" class="m-1">
+                        <mat-label>Respuesta</mat-label>
+                        <input type="text" formControlName="respuesta" required matInput>
+
+                        <mat-error *ngIf="recuForm.get('respuesta')?.errors?.required">
+                            El respuesta es <strong>requerida</strong>
+                        </mat-error>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group">
+                    <button [disabled]="recuForm.invalid" class="btn btn-primary">
+                        Recuperar contraseña
+                    </button>
+                </div>
+                <p class="text-danger">{{mensaje}} </p> 
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -26,6 +26,13 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
     { name: '9' },
     { name: 'k' }
   ];
+  public preguntas = [
+    { idPregunta: 1 , texto: "¿Cómo se llamaba tu primera mascota?" },
+    { idPregunta: 2 , texto: "¿Cuál es tu comida favorita?" },
+    { idPregunta: 3 , texto: "¿Cuál es tu color favorito?" }
+  ]
+
+
   public pac: Paciente;
   public regiones$: Observable<Region[]>;
   public comunas: Comuna[];
@@ -34,8 +41,10 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
   public comunaDisabled = true;
   public pacienteForm: FormGroup;
   public idRegion: number;
-
+  public idPregunta: number;
   
+  public dist: boolean = false;
+
   constructor(
     public form: FormBuilder,
     private router: Router,
@@ -56,7 +65,9 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
       email: ['', Validators.required],
       user: ['', Validators.required],
       password: ['', Validators.required],
-      confirmacion: ['', Validators.required]
+      confirmacion: ['', Validators.required],
+      pregunta: [null, Validators.required],
+      respuesta: [{value: '', disabled: true}, Validators.required]
     });
   }
 
@@ -75,7 +86,11 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
     this.pacienteForm.get('comuna').setValue('');
     this.pacienteForm.get('comuna').enable();
   }
-
+  onChangePregunta(valor: number) {
+    this.idPregunta = valor;
+    this.pacienteForm.get('respuesta').setValue('');
+    this.pacienteForm.get('respuesta').enable();
+  }
   get comunasByRegion() {
     try {
       return this.comunas.filter(items => {
@@ -87,20 +102,22 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
   }
   
   submit() {
+    if (this.pacienteForm.value.password == this.pacienteForm.value.confirmacion) {
     this.pac = {
       idPaciente: 0,
       nombre: this.pacienteForm.value.nombre,
       apellidos: this.pacienteForm.value.apellidos,
       rut: this.pacienteForm.value.rut,
-      digVer: this.pacienteForm.value.digVer,
+      digVer: this.pacienteForm.value.digVerr,
       direccion: this.pacienteForm.value.direccion,
       idRegion: this.pacienteForm.value.region,
       idComuna: this.pacienteForm.value.comuna,
       email: this.pacienteForm.value.email,
       username: this.pacienteForm.value.user,
       password: this.pacienteForm.value.password,
+      pregunta: this.pacienteForm.value.pregunta,
+      respuesta: this.pacienteForm.value.respuesta
     }
-
     this.pacienteService.addPaciente(this.pac)
       .subscribe(() => {
         //console.log(res)
@@ -108,6 +125,10 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
       })
 
       window.location.href="/login";
+
+    }else {
+      this.dist = true
+    }
   }
 
 

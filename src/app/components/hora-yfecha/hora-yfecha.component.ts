@@ -56,14 +56,14 @@ export class HoraYFechaComponent implements OnInit, OnDestroy {
   async onClickAccept() {
     this.time = this.agendarForm.value.timeInput;
     this.timeCut = this.time.split(':');
-    this.date.setHours(parseInt(this.timeCut[0], 10), parseInt(this.timeCut[1], 10));
+    
+    this.date.setHours(parseInt(this.timeCut[0], 10) - 4, parseInt(this.timeCut[1], 10));
 
     this.newCita.fechaHora = this.date;
     this.newCita.idEstado = 1;
     this.newCita.idMedico = this.idmedico;
     this.newCita.idPaciente = this.id;
     this.newCita.descripcion = "";
-
     this.servicioCitas.addCita(this.newCita).subscribe(() => {
       console.log('Content updated successfully!')
     })
@@ -72,7 +72,8 @@ export class HoraYFechaComponent implements OnInit, OnDestroy {
   }
 
   onDateSelect(valor: NgbDateStruct) {
-    this.date.setFullYear(valor.year, valor.month, valor.day);
+
+    this.date.setFullYear(valor.year, valor.month - 1, valor.day);
     console.log(this.date);
   }
 

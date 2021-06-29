@@ -43,6 +43,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { NegadoComponent } from './components/negado/negado.component';
+import { NgxCaptchaModule } from 'ngx-captcha';
+import { RecuperarContraComponent } from './components/recuperar-contra/recuperar-contra.component';
+import { NuevaContraComponent } from './components/nueva-contra/nueva-contra.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +77,9 @@ import { NegadoComponent } from './components/negado/negado.component';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
-    NegadoComponent
+    NegadoComponent,
+    RecuperarContraComponent,
+    NuevaContraComponent
 
   ],
   imports: [
@@ -93,7 +98,8 @@ import { NegadoComponent } from './components/negado/negado.component';
     MatFormFieldModule,
     MatCardModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    NgxCaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
