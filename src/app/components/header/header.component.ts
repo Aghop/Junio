@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+//MUESTRA EL NOMBRE DE USUARIO Y BOTON PARA DESCONECTAR SI SE ESTA LOGEADO
 
   public logged = false;
   public datos = '';
@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    //SE COMPRUEBA QUE EXISTA UN USUARIO O UN ADMIN LOGEADO
     if (localStorage.getItem('hospital')) {
       this.datos = JSON.parse(localStorage.getItem('hospital')).username;
     }
@@ -31,6 +32,7 @@ export class HeaderComponent implements OnInit {
 
   }
   deslog() {
+    //SE REMUEVEN TODOS LOS LOGEOS
     localStorage.removeItem('hospital');
     localStorage.removeItem('hospitalAmin');
     window.location.href="/login";

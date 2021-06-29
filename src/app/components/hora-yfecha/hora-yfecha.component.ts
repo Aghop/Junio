@@ -11,7 +11,7 @@ import { ServicioCitasService } from 'src/app/serv/cita/servicio-citas.service';
   styleUrls: ['./hora-yfecha.component.scss']
 })
 export class HoraYFechaComponent implements OnInit, OnDestroy {
-
+//MODAL PARA ELEGIR LA FECHA Y HORA DE LA CITA
   @Input() idmedico: number;
   @Input() id: number;
 
@@ -54,9 +54,10 @@ export class HoraYFechaComponent implements OnInit, OnDestroy {
   }
 
   async onClickAccept() {
+    //SE SEPARA LA CADENA DE TIEMPO EN HORAS Y MINUTOS
     this.time = this.agendarForm.value.timeInput;
     this.timeCut = this.time.split(':');
-    
+    // SE CONVIERTE EN INT Y SE RESTA 4 POR LA DIFERENCIA HORARIA
     this.date.setHours(parseInt(this.timeCut[0], 10) - 4, parseInt(this.timeCut[1], 10));
 
     this.newCita.fechaHora = this.date;
@@ -64,6 +65,7 @@ export class HoraYFechaComponent implements OnInit, OnDestroy {
     this.newCita.idMedico = this.idmedico;
     this.newCita.idPaciente = this.id;
     this.newCita.descripcion = "";
+    
     this.servicioCitas.addCita(this.newCita).subscribe(() => {
       console.log('Content updated successfully!')
     })

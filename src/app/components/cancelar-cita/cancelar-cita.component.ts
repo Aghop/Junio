@@ -12,6 +12,8 @@ import { ServicioCitasService } from 'src/app/serv/cita/servicio-citas.service';
   styleUrls: ['./cancelar-cita.component.scss']
 })
 export class CancelarCitaComponent implements OnInit, OnDestroy {
+
+  /* ----------------------- MODAL PARA CANCELAR LA CITA ---------------------- */
   @Input() cita: Cita;
   public cancelForm: FormGroup;
   public citaSubscription: Subscription;

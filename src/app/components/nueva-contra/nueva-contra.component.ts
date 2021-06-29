@@ -26,9 +26,8 @@ export class NuevaContraComponent implements OnInit {
   ngOnInit(): void {
   }
   onClickAccept() {
-    
+    //SE COMPRUEBA QUE LAS CONTRASENAS NUEVAS CALCEN
     if (this.nuevaForm.value.password == this.nuevaForm.value.confirmacion) {
-      console.log(this.nuevaForm.value.password,this.nuevaForm.value.confirmacion)
       this.paciente.password = this.nuevaForm.value.password;
       this.servicioPaciente.updateContra(this.paciente).subscribe(() => {
         console.log('Content updated successfully!')
@@ -36,6 +35,7 @@ export class NuevaContraComponent implements OnInit {
       this.activeModal.close('Close click');
       window.location.href=`/login`;
     } else {
+      //SI NO, UN MENSAJE DE ERROR
       this.dist = true
     }
 

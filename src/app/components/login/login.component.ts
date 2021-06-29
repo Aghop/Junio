@@ -8,7 +8,7 @@ import { LoginService } from 'src/app/serv/login/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+//VISTA PRINCIPAL, PARA LOGEAR RECUPERAR CONTRA O REGISTRARSE
   public loginForm: FormGroup;
   public radioSelected: string;
   public mensaje: string = "";
@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(public form: FormBuilder, public loginService: LoginService) {
 
+//KEY PARA EL CAPTCHA
     this.siteKey="6LcCE2IbAAAAALIyIxaeoCdeqH798uT0lD5nuTya";
     
     this.loginForm = this.form.group({
@@ -36,7 +37,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
+//SE REALIZA UNA COMPROBACION DISTINTA DEPENDIENDO DEL SELECT
+//ESTA PARA UN PACIENTE
     if (!this.loginForm.value.option) {
     this.loginService.validarLoginPaciente(this.loginForm.value.username, this.loginForm.value.password).subscribe(datos => {
 
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
 
     });
   }
+  //ESTA PARA UN ADMIN
     if (this.loginForm.value.option) {
       this.loginService.validarLoginAdmin(this.loginForm.value.username, this.loginForm.value.password).subscribe(datos => {
 
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit {
       } else {
         console.log(datos);
         localStorage.setItem('hospitalAdmin',JSON.stringify( {"username": datos[0].username, "id": datos[0].idPaciente, "admin": true }) );
-        window.location.href=`/root`;
+        window.location.href=`/root`; //LLEVAN A RUTAS DISTINTAS SI ES UN ADMIN O UN PACIENTE
       }
 
     });

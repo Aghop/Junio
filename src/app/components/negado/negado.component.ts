@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./negado.component.scss']
 })
 export class NegadoComponent implements OnInit {
-
+//COMPONENTE PARA ACCESO DENEGADO
   constructor() { }
 
   ngOnInit(): void {

@@ -14,6 +14,12 @@ import { Comuna } from 'src/app/interfaces/comuna';
   styleUrls: ['./formulario-crear-cuenta.component.scss'],
 })
 export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
+/* ------------------------ FORMULARIO PARA REGISTRO ------------------------ */
+
+
+
+
+  /* ------------------------- ARRAYS PARA LOS SELECT ------------------------- */
   public digVer = [
     { name: '1' },
     { name: '2' },
@@ -26,6 +32,7 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
     { name: '9' },
     { name: 'k' }
   ];
+
   public preguntas = [
     { idPregunta: 1 , texto: "¿Cómo se llamaba tu primera mascota?" },
     { idPregunta: 2 , texto: "¿Cuál es tu comida favorita?" },
@@ -81,16 +88,19 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.comunaSubscription.unsubscribe();
   }
+  //FUNCION PARA QUE LAS COMUNAS SOLO SE MUESTREN CUANDO HAY UNA REGION SELECCIONADA
   onChange(valor: number) {
     this.idRegion = valor;
     this.pacienteForm.get('comuna').setValue('');
     this.pacienteForm.get('comuna').enable();
   }
+  //LO MISMO DE ARRIBA PERO CON LAS PREGUNTAS Y RESPUESTAS
   onChangePregunta(valor: number) {
     this.idPregunta = valor;
     this.pacienteForm.get('respuesta').setValue('');
     this.pacienteForm.get('respuesta').enable();
   }
+  // PARA LLENAR EL ARRAY DE COMUNAS CON LAS QUE CORRESPONDAD POR REGION
   get comunasByRegion() {
     try {
       return this.comunas.filter(items => {
@@ -120,13 +130,12 @@ export class FormularioCrearCuentaComponent implements OnInit, OnDestroy {
     }
     this.pacienteService.addPaciente(this.pac)
       .subscribe(() => {
-        //console.log(res)
-        //this.pacienteForm.reset();
       })
 
       window.location.href="/login";
 
     }else {
+      //VARIABLE PARA MOSTRAR UN ERROR
       this.dist = true
     }
   }

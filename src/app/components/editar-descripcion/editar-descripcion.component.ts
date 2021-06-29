@@ -11,6 +11,8 @@ import { ServicioCitasService } from 'src/app/serv/cita/servicio-citas.service';
   styleUrls: ['./editar-descripcion.component.scss']
 })
 export class EditarDescripcionComponent implements OnInit {
+
+  /* ---------- MODAL PARA EDITAR LA DESCRIPCION Y ESTADO DE UNA CITA --------- */
   @Input() cita: Cita;
   public editForm: FormGroup;
   public citaSubscription: Subscription;
@@ -46,10 +48,10 @@ export class EditarDescripcionComponent implements OnInit {
   ngOnInit(): void {
   }
   async onClickAccept() {
-
+/* ------------------------------- FORMULARIO ------------------------------- */
     this.cita.descripcion = this.editForm.value.razon;
     this.cita.idEstado = this.editForm.value.estado;
-
+/* ------------------------------ SUBSCRIPTION ------------------------------ */
     this.citaSubscription = this.servicioCitas.updateCita(this.cita).subscribe(() => {
       console.log('Content updated successfully!')
     })

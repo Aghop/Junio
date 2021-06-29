@@ -11,6 +11,7 @@ import { NuevaContraComponent } from '../nueva-contra/nueva-contra.component';
   styleUrls: ['./recuperar-contra.component.scss']
 })
 export class RecuperarContraComponent implements OnInit {
+  //VISTA PARA CONSULTAR EL EMAIL PREGUNTA Y RESPUESTA
   public recuForm: FormGroup;
   public mensaje: string = "";
   public idPregunta: number;
@@ -45,11 +46,12 @@ export class RecuperarContraComponent implements OnInit {
   }
   onSubmit() {
     this.servicioPaciente.validarPregunta(this.recuForm.value.email, this.recuForm.value.pregunta, this.recuForm.value.respuesta).subscribe(datos => {
-
+// SE COMPRUEBA QUE EL EMAIL CALCE CON LA PREGUNTA Y RESPUESTA SECRETA
       if (datos.length == 0) {
         this.mensaje = "Datos incorrectos";
       } else {
         console.log(datos);
+        //SE ABRE EL MODAL PARA LA NUEVA CONTRA
         const modalRef = this.modalService.open(NuevaContraComponent);
         modalRef.componentInstance.paciente = datos[0];
       }

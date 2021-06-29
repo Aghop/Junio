@@ -16,7 +16,7 @@ import { HoraYFechaComponent } from '../hora-yfecha/hora-yfecha.component';
   styleUrls: ['./agendar-hora.component.scss']
 })
 export class AgendarHoraComponent implements OnInit, OnDestroy {
-
+/* ------- MODAL QUE MUESTRA LOS MEDICOS DISPONIBLES PARA AGENDAR HORA ------ */
   public medico$: Observable<Medico[]>;
 
   public especialidad: Especialidad[];
@@ -58,6 +58,7 @@ export class AgendarHoraComponent implements OnInit, OnDestroy {
 
   }
   open(idmedico, id){
+    //se abre un modal para elegir la fecha y hora
     const modalRef = this.modalService.open(HoraYFechaComponent);
     modalRef.componentInstance.idmedico = idmedico;
     modalRef.componentInstance.id = id;

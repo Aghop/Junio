@@ -21,7 +21,7 @@ import { EditarDescripcionComponent } from '../editar-descripcion/editar-descrip
   styleUrls: ['./listar-editcitas.component.scss']
 })
 export class ListarEditcitasComponent implements OnInit, OnDestroy {
-
+//VISTA EXCLUSIVA DEL ADMIN DONDE VE TODAS LAS CITAS DEL PACIENTE PARA EDITARLAS
   public id: number;
   public citas$: Observable<Cita[]>;
   public cantCitas: number;
@@ -61,6 +61,8 @@ export class ListarEditcitasComponent implements OnInit, OnDestroy {
     this.activatedRoute.params.subscribe(parametros => {
       this.id = parametros['id'];
     })
+        // se obtienen las cookies para que solo lo vea un administrador
+
     let datos = JSON.parse(localStorage.getItem('hospitalAdmin'));
     if (!datos) {
       window.location.href=`/negado`;
@@ -75,12 +77,14 @@ export class ListarEditcitasComponent implements OnInit, OnDestroy {
   }
 
   onClickDelete(id: string){
+    //se elimina una cita mediante un suscribe con el id de la cita
     this.servicioCitas.deleteCita(id).subscribe(() => {
       console.log('Content deleted successfully!')
       window.location.reload();
     });
   }
   onClickEdit(cita: Cita) {
+    // se abre un modal para editar la cita
     const modalRef = this.modalService.open(EditarDescripcionComponent);
     modalRef.componentInstance.cita = cita;
   }

@@ -24,6 +24,7 @@ import { CentroMedico } from 'src/app/interfaces/centro-medico';
   styleUrls: ['./listar-pacientes.component.scss']
 })
 export class ListarPacientesComponent implements OnInit, OnDestroy {
+  //VISTA DEL ADMIN DONDE VE TODOS LOS PACIENTES Y MEDICOS
   public formFilter: FormGroup;
   public regiones: Region[];
   public regiones$: Observable<Region[]>;
@@ -115,13 +116,14 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     this.pacienteSubscription = this.paciente$.subscribe((pacientesList: Paciente[]) => this.paciente = pacientesList);
     this.especialidadSubscription = this.especialidad$.subscribe((especialidadList: Especialidad[]) => this.especialidad = especialidadList);
     this.centroMedicoSubscription = this.centroMedico$.subscribe((centroMedicoList: CentroMedico[]) => this.centroMedico = centroMedicoList);
-  }
+  }  
+  // función busca la región y se reinicie el valor de la comuna
   onChange(valor: number) {
     this.idRegion = valor;
     this.formFilter.get('comuna').setValue(null);
     this.formFilter.get('comuna').enable();
   }
-
+// función que cambia las comunas dependiendo de la región que esté elegida
   get comunasByRegion() {
     try {
       return this.comunas.filter(items => {
@@ -131,6 +133,7 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
       return null;
     }
   }
+  // se realizan 3 pipes diferentes, la primera, es filtrar el nombre, luego la región y finalmente la comuna
   get pacientesFilter() {
     return this.pipeComuna.transform(
                                     this.pipeRegion.transform(

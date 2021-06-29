@@ -22,6 +22,9 @@ import { AgendarHoraComponent } from '../agendar-hora/agendar-hora.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListarCitasComponent implements OnInit, OnDestroy{
+//VENTANA PRINCIPAL AL LOGEAR, MUESTRA LAS CITAS DEL PACIENTE
+
+
   public id: number;
   public citas$: Observable<Cita[]>;
   public cantCitas: number;
@@ -39,6 +42,7 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
   public radioSelected: string;
   public displayedColumns1 = ['Fecha', 'Medico', 'Especialidad', 'Reprogramar', 'Cancelar'];
   public displayedColumns2 = ['Fecha', 'Medico', 'Especialidad', 'Descripcion', 'Estado'];
+
   constructor(
     public servicioCitas: ServicioCitasService, 
     public servicioMedicos: ServicioMedicoService, 
@@ -62,7 +66,7 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
     this.activatedRoute.params.subscribe(parametros => {
       this.id = parametros['id'];
     });
-
+//SI NO SE ESTA LOGEADO REDIRIGE AL LOGIN
     let datos = JSON.parse(localStorage.getItem('hospital'));
     if (!datos || datos.id != this.id) {
       window.location.href="/login";
@@ -76,7 +80,7 @@ export class ListarCitasComponent implements OnInit, OnDestroy{
     this.especialidadSubscription = this.especialidad$.subscribe( (especialidadList: Especialidad[]) => this.especialidad = especialidadList  );;
 
   }
-
+//MODALS PARA CADA FUNCION REQUERIDA: CANCELAR, REPROGRAMAR Y AGENDAR 
   onClickCancel(cita: Cita) {
     const modalRef = this.modalService.open(CancelarCitaComponent);
     modalRef.componentInstance.cita = cita;
