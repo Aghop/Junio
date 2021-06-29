@@ -11,7 +11,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavVarComponent } from './components/nav-var/nav-var.component';
 import { ListarCitasComponent } from './components/listar-citas/listar-citas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +26,6 @@ import { CancelarCitaComponent } from './components/cancelar-cita/cancelar-cita.
 import { ReprogramarCitaComponent } from './components/reprogramar-cita/reprogramar-cita.component';
 import { FormularioCrearCuentaComponent } from './components/formulario-crear-cuenta/formulario-crear-cuenta.component';
 import { ComunasByRegionPipe } from './pipes/comunas/comunas-by-region.pipe';
-import { FiltrarMedicosComponent } from './components/filtrar-medicos/filtrar-medicos.component';
 import { IdToNameCentroPipe } from './pipes/centrosMedicos/id-to-name-centro.pipe';
 import { AgendarHoraComponent } from './components/agendar-hora/agendar-hora.component';
 import { HoraYFechaComponent } from './components/hora-yfecha/hora-yfecha.component';
@@ -50,7 +48,6 @@ import { NuevaContraComponent } from './components/nueva-contra/nueva-contra.com
 @NgModule({
   declarations: [
     AppComponent,
-    NavVarComponent,
     ListarCitasComponent,
     EstadoPipe,
     MedicoPipe,
@@ -62,7 +59,6 @@ import { NuevaContraComponent } from './components/nueva-contra/nueva-contra.com
     ReprogramarCitaComponent,
     FormularioCrearCuentaComponent,
     ComunasByRegionPipe,
-    FiltrarMedicosComponent,
     IdToNameCentroPipe,
     AgendarHoraComponent,
     HoraYFechaComponent,
