@@ -73,6 +73,22 @@ function getPacienteLogin(username, password) {
         });
     });
 }
+function getPacienteRecuperar(email, pregunta, respuesta) {
+    return __awaiter(this, void 0, void 0, function () {
+        var row, connection;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    return [4 /*yield*/, connection.query("SELECT * FROM paciente WHERE email=? and pregunta=? and respuesta=?", [email, pregunta, respuesta])];
+                case 2:
+                    row = _a.sent();
+                    return [2 /*return*/, row];
+            }
+        });
+    });
+}
 function getPacienteById(id) {
     return __awaiter(this, void 0, void 0, function () {
         var row, connection;
@@ -97,7 +113,7 @@ function addPaciente(paciente) {
                 case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
                 case 1:
                     connection = _a.sent();
-                    return [4 /*yield*/, connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "',md5('" + paciente.password + "'),'" + paciente.idRegion + "','" + paciente.idComuna + "');")];
+                    return [4 /*yield*/, connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`,`pregunta`,`respuesta`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "',md5('" + paciente.password + "'),'" + paciente.idRegion + "','" + paciente.idComuna + "','" + paciente.pregunta + "','" + paciente.respuesta + "');")];
                 case 2:
                     row = _a.sent();
                     return [2 /*return*/, row];
@@ -105,4 +121,20 @@ function addPaciente(paciente) {
         });
     });
 }
-exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente, getPacienteLogin: getPacienteLogin };
+function updatePaciente(paciente) {
+    return __awaiter(this, void 0, void 0, function () {
+        var row, connection;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, mariaDB_module_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    return [4 /*yield*/, connection.query("UPDATE `paciente` SET `password`=md5('" + paciente.password + "') WHERE idPaciente=?", paciente.idPaciente)];
+                case 2:
+                    row = _a.sent();
+                    return [2 /*return*/, row];
+            }
+        });
+    });
+}
+exports.default = { getPacientes: getPacientes, getPacienteById: getPacienteById, addPaciente: addPaciente, getPacienteLogin: getPacienteLogin, getPacienteRecuperar: getPacienteRecuperar, updatePaciente: updatePaciente };

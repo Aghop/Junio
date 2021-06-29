@@ -21,7 +21,7 @@ function addCita(cita: Cita){
     return citaRepository.addCita(cita);
 }
 
-function deleteCita (id: String) {
+function deleteCita (id: string) {
     return citaRepository.deleteCita(id);
 }
 

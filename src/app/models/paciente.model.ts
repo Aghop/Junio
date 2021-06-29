@@ -10,4 +10,6 @@ export interface Paciente{
     password:   String;
     idRegion:   number;
     idComuna:   number;
+    pregunta:   String;
+    respuesta:  String;
 }

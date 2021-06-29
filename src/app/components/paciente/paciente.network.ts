@@ -27,7 +27,19 @@ router.get('/login', async (req: Request, res: Response) => {
         res.status(500).send({ error: "Unexpected error" })
     }
 });
+router.get('/recuperar', async (req: Request, res: Response) => {
+    let paciente;
+    const email:any = req.query.email;
+    const pregunta:any = req.query.pregunta;
+    const respuesta:any = req.query.respuesta;
 
+    try {
+        paciente = await pacienteController.getPacienteRecuperar(email,pregunta,respuesta);
+        res.send(paciente);
+    } catch (error) {
+        res.status(500).send({ error: "Unexpected error" })
+    }
+});
 router.get('/:id', async (req: Request, res: Response) => {
     let id = req.params.id;
     let paciente;
@@ -45,6 +57,16 @@ router.post('/', async (req: Request, res: Response) => {
     try {
         const newPaciente = await pacienteController.addPaciente(paciente);
         res.send(newPaciente);
+    } catch (error) {
+        res.status(500).send({ error: "Unexpected error" })
+    }
+});
+router.put('/update/', async (req: Request, res: Response) => {
+    const paciente = req.body;
+    console.log(req.body);
+    try {
+        const updatedPaciente = await pacienteController.updatePaciente(paciente);
+        res.send(updatedPaciente);
     } catch (error) {
         res.status(500).send({ error: "Unexpected error" })
     }

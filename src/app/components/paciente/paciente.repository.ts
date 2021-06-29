@@ -17,6 +17,13 @@ async function getPacienteLogin(username: String,password: String){
     return row;
 }
 
+async function getPacienteRecuperar(email: String,pregunta: number, respuesta: String){
+    let row;
+    let connection = await mariaDBModule.connect();
+    row = await connection.query("SELECT * FROM paciente WHERE email=? and pregunta=? and respuesta=?",[email,pregunta,respuesta]);
+    return row;
+}
+
 async function getPacienteById(id: String){
     let row;
     let connection = await mariaDBModule.connect();
@@ -27,8 +34,13 @@ async function getPacienteById(id: String){
 async function addPaciente(paciente: Paciente){
     let row;
     let connection = await mariaDBModule.connect();
-    row = await connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "',md5('" + paciente.password + "'),'" + paciente.idRegion + "','" + paciente.idComuna + "');");
+    row = await connection.query("INSERT INTO `paciente` (`nombre`,`apellidos`,`rut`,`digVer`,`direccion`,`email`,`username`,`password`,`idRegion`,`idComuna`,`pregunta`,`respuesta`) VALUES ('" + paciente.nombre + "','" + paciente.apellidos + "','" + paciente.rut + "','" + paciente.digVer + "','" + paciente.direccion + "','" + paciente.email + "','" + paciente.username + "',md5('" + paciente.password + "'),'" + paciente.idRegion + "','" + paciente.idComuna + "','" + paciente.pregunta + "','" + paciente.respuesta + "');");
     return row;
 }
-
-export default { getPacientes, getPacienteById, addPaciente,getPacienteLogin }
+async function updatePaciente(paciente: Paciente){
+    let row;
+    let connection = await mariaDBModule.connect();
+    row = await connection.query("UPDATE `paciente` SET `password`=md5('" + paciente.password + "') WHERE idPaciente=?", paciente.idPaciente);
+    return row;
+}
+export default { getPacientes, getPacienteById, addPaciente,getPacienteLogin , getPacienteRecuperar, updatePaciente}
